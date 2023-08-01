@@ -27,7 +27,7 @@ Route::post('register', 'App\Http\Controllers\Auth\RegisterController@RegisterFo
 
 
 Route::group(['middleware' => 'loginss'], function () {
-    Route::group(['prefix' => 'amitkumawat'], function () {
+    Route::group(['prefix' => 'admin'], function () {
         Route::get('Dashbord', [Admin::class, 'index']);
 
         Route::get('tables', [Admin::class, 'tables'])->name('tables');

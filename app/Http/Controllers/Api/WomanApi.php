@@ -9,6 +9,31 @@ use App\Models\WomanModel;
 
 class WomanApi extends Controller
 {
+
+
+public function Woman_List(){
+    try {
+        $reslut =WomanModel::all();
+
+        return response()->json([
+            'status'=>true,
+            'message'=>'successfull Show List',
+            'data'=>$reslut,
+        ]);
+
+    } catch (\Throwable $th) {
+        return response()->json([
+            'status'=>true,
+            'message'=>$th->getMessage(),
+            'data'=>[],
+        ]);
+    }
+
+}
+
+
+
+
     public function Woman_Api_Function(Request $request){
         try {
 

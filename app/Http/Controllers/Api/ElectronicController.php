@@ -4,34 +4,28 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ManModel;
+use App\Models\ElectronicModel;
 
-class ManApi extends Controller
+class ElectronicController extends Controller
 {
-
-    public function Main_Api_Function()
-    {
-
-        $reslut =ManModel::all();
+    public function Electronic_List(){
         try {
+            $result=ElectronicModel::all();
             return response()->json([
-                'status' => true,
-                'message' => 'Successfully add data',
-                'data' => $reslut
+                'status'=>true,
+                'message'=>'successfull Show List',
+                'data'=>$result,
             ]);
-        } catch (\Throwable $rg) {
+        } catch (\Throwable $th) {
             return response()->json([
-                'status' => false,
-                'message' => $rg->getMessage(),
-                'data' => [],
+                'status'=>false,
+                'message'=>$th->getMessage(),
+                'data'=>[],
             ]);
         }
     }
-
-
-    public function Man_Add(Request $request){
-
-        $reslut = new ManModel();
+    public function Electronic_add(Request $request){
+        $reslut = new ElectronicModel();
 
         if ($request->hasFile('Photo')) {
             $photos = $request->file('Photo');
@@ -45,16 +39,15 @@ class ManApi extends Controller
         try {
             return response()->json([
                 'status'=>true,
-                'message'=>'successfully add data',
+                'message'=>'successfull Add data',
                 'data'=>$reslut,
             ]);
         } catch (\Throwable $th) {
             return response()->json([
-                'status'=>true,
+                'status'=>false,
                 'message'=>$th->getMessage(),
                 'data'=>[],
             ]);
-
         }
     }
 }

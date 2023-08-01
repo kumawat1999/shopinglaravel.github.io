@@ -4,35 +4,31 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ManModel;
+use App\Models\Electronic3Model;
 
-class ManApi extends Controller
+class Electronic3Controller extends Controller
 {
-
-    public function Main_Api_Function()
+    public function Electronic3_list()
     {
-
-        $reslut =ManModel::all();
         try {
+            $data = Electronic3Model::all();
             return response()->json([
                 'status' => true,
-                'message' => 'Successfully add data',
-                'data' => $reslut
+                'message' => 'successfully show list',
+                'data' => $data,
             ]);
-        } catch (\Throwable $rg) {
+        } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => $rg->getMessage(),
+                'message' => $th->getMessage(),
                 'data' => [],
             ]);
         }
     }
 
-
-    public function Man_Add(Request $request){
-
-        $reslut = new ManModel();
-
+    public function Electronic3_add(Request $request)
+    {
+        $reslut = new Electronic3Model();
         if ($request->hasFile('Photo')) {
             $photos = $request->file('Photo');
             $PhotoName = rand(100000, 999999) . '.' . $photos->getClientOriginalExtension();
@@ -40,21 +36,23 @@ class ManApi extends Controller
         }
         $reslut->Title = $request->get('Title');
         $reslut->Price = $request->get('Price');
-        $reslut->Photo=$PhotoName;
+        $reslut->Photo = $PhotoName;
         $reslut->save();
         try {
             return response()->json([
-                'status'=>true,
-                'message'=>'successfully add data',
-                'data'=>$reslut,
+                'status' => true,
+                'message' => 'successfully add data',
+                'data' => $reslut,
             ]);
         } catch (\Throwable $th) {
             return response()->json([
-                'status'=>true,
-                'message'=>$th->getMessage(),
-                'data'=>[],
+                'status' => false,
+                'message' => $th->getMessage(),
+                'data' => [],
             ]);
-
         }
     }
 }
+
+
+
