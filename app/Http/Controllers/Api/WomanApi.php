@@ -32,9 +32,7 @@ public function Woman_List(){
 }
 
 
-
-
-    public function Woman_Api_Function(Request $request){
+    public function Woman_Data_Add(Request $request){
         try {
 
             $reslut = new WomanModel();
@@ -61,6 +59,75 @@ public function Woman_List(){
                 ]);
         }
 
+    }
+
+
+    public function Woman_Fatch($id){
+        try {
+
+            $data=WomanModel::where('id',$id)->first();
+            return response()->json([
+                'status'=>true,
+                'message'=>'SuccesFully Fatch Data',
+                'data'=>$data,
+            ]);
+        } catch (\Throwable $th) {
+                return response()->json([
+                    'status'=>false,
+                    'message'=>$th->getMessage(),
+                    'data'=>[],
+                ]);
+        }
+    }
+
+
+    public function Woman_Update(Request $request,$id){
+        try {
+            $photos='';
+            if($photos==''){
+                $photos=$request->get('Photo_hidden');
+            }
+
+            if ($request->hasFile('Photo')) {
+                $photos = $request->file('Photo');
+                $PhotoName = rand(100000, 999999) . '.' . $photos->getClientOriginalExtension();
+                $photos->move(public_path('images'), $PhotoName);
+            }
+           $data= WomanModel::where('id',$id)->update([
+                'Title'=>$request->get('Title'),
+                'Price'=> $request->get('Price'),
+                'Photo'=>$PhotoName,
+            ]);
+            return response()->json([
+                'status'=>true,
+                'message'=>'Succefully Updated Data',
+                'data'=>$data,
+            ]);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status'=>false,
+                'message'=>$th->getMessage(),
+                'data'=>[],
+            ]);
+        }
+    }
+    public function Woman_Delete($id){
+        try {
+        $data=WomanModel::where('id',$id)->first()->delete();
+        return response()->json([
+            'status'=>true,
+            'message'=>'Successfully Deleted Data',
+            'data'=>$data,
+
+        ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status'=>false,
+                'message'=>$th->getMessage(),
+                'data'=>[],
+            ]);
+        }
     }
 }
 

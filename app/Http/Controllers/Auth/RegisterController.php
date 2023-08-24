@@ -21,13 +21,20 @@ class RegisterController extends Controller
             'password'=>'required',
         ]);
 
-        $result=User::create([
+
+       $result= User::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password)
         ]);
-
+        \Mail::send('Auth/sendmailmessage',compact($result), function ($message) use($request) {
+            $message->to($request->get('email'))->subject('Subject of the message!');
+        });
         auth()->login($result);
         return redirect('login')->withSuccess('your registation details for successful add..');
-    }
+
+
+
+   }
+
 }

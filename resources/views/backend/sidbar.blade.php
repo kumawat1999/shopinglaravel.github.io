@@ -57,6 +57,14 @@
                 <li><a href="{{route('Jewellery3/list')}}"> <span>Jewellery 3</span></a></li>
              </ul>
           </li>
+          <li>
+             <a href="#categroy" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-table purple_color2"></i> <span>Categroys</span></a>
+             <ul class="collapse list-unstyled" id="categroy">
+                <li><a href="{{route('Categroy/List')}}"> <span>Man Categroy</span></a></li>
+                <li><a href="{{route('main/relationShip')}}"> <span>RelationShip</span></a></li>
+                <li><a href="{{route('Sub/Categroy/List')}}"> <span>Sub Categroy</span></a></li>
+             </ul>
+          </li>
           <li><a href="price.html"><i class="fa fa-briefcase blue1_color"></i> <span>Pricing Tables</span></a></li>
           <li>
              <a href="contact.html">

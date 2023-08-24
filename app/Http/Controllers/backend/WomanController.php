@@ -38,4 +38,38 @@ class WomanController extends Controller
         $reslut->save();
         return redirect()->route('woman/list');
     }
+
+    public function Woman_Edit($id){
+        $data=WomanModel::where('id',$id)->first();
+        return view('backend.Woman.edit',compact('data'));
+    }
+
+    public function Woman_Update(Request $request,$id){
+        $request->validate([
+            'Title' => 'required',
+            'Price' => 'required',
+            'Photo' => 'required',
+        ]);
+        $photos='';
+        if($photos==''){
+            $photos=$request->get('Photo_hidden');
+        }
+
+        if ($request->hasFile('Photo')) {
+            $photos = $request->file('Photo');
+            $PhotoName = rand(100000, 999999) . '.' . $photos->getClientOriginalExtension();
+            $photos->move(public_path('images'), $PhotoName);
+        }
+        WomanModel::where('id',$id)->update([
+            'Title'=>$request->get('Title'),
+            'Price'=> $request->get('Price'),
+            'Photo'=>$PhotoName,
+        ]);
+        return redirect()->route('woman/list');
+    }
+    public function Woman_Delete($id){
+        $data=WomanModel::where('id',$id)->first();
+        $data->delete();
+        return redirect()->route('woman/list');
+    }
 }

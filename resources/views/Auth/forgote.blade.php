@@ -8,7 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Login...</title>
+      <title>Forget...</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -19,7 +19,7 @@
       <!-- site css -->
       <link rel="stylesheet" href="{{asset('backend/style.css')}}" />
       <!-- responsive css -->
-      <link rel="stylesheet" href="{{asset('backend/css/responsive.css"')}} />
+      <link rel="stylesheet" href="{{asset('backend/css/responsive.css')}}" />
       <!-- color css -->
       <link rel="stylesheet" href="{{asset('backend/css/colors.css')}}" />
       <!-- select bootstrap -->
@@ -34,7 +34,14 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
+      <script>
+        $(document).ready(function() {
+                $(".meassagealert").hide(4000);
+        });
+    </script>
    </head>
+
+
    <body class="inner_page login">
       <div class="full_container">
          <div class="container">
@@ -45,42 +52,29 @@
                         <img width="210" src="{{asset('backend/images/logo/logo.png')}}" alt="#" />
                      </div>
                   </div>
+                    @if($message = Session::get('success'))
+                    <div class="alert alert-success alert-block meassagealert">{{$message}}</div>
+                    @endif
                   <div class="login_form">
                      <form method="post">
                         @csrf
                         <fieldset>
                            <div class="field">
-                               <label class="label_field">User Name</label>
-                               <input type="text" name="name" value="{{old('name')}}" placeholder="Name" />
-                               @error('name')
-                                   <div class="errormessage">{{$message}}</div>
-                               @enderror
-                            </div>
-                           <div class="field">
                               <label class="label_field">Email Address</label>
-                              <input type="email" name="email" value="{{old('email')}}" placeholder="E-mail" />
+                              <input type="email" name="email" placeholder="E-mail" />
                               @error('email')
                                   <div class="errormessage">{{$message}}</div>
                               @enderror
-                           </div>
-                           <div class="field">
-                              <label class="label_field">Password</label>
-                              <input type="password" name="password" value="{{old('password')}}" placeholder="Password" />
-                              @error('password')
-                                  <div class="errormessage">{{$message}}</div>
-                              @enderror
-                           </div>
 
                            <div class="field">
                               <label class="label_field hidden">hidden label</label>
-                              <label class="form-check-label"><input type="checkbox" class="form-check-input"> Remember Me</label>
-                              <a class="forgot" href="{{route('forgot/pass')}}">Forgotten Password?</a>
+                              {{-- <label class="form-check-label"><input type="checkbox" class="form-check-input"> Remember Me</label> --}}
                            </div>
                            <div class="field margin_0">
                               <label class="label_field hidden">hidden label</label>
-                              <button class="main_bt" type="submit">Register</button>
-                              <a class="main_bt2" href="{{route('login')}}">Sing In</a>
-                           </div>
+                              <button class="main_bt2" type="submit">Send E-Mail</button>
+                              <a class="main_bt" href="{{route('login')}}">Back</a>
+                            </div>
                         </fieldset>
                      </form>
                   </div>

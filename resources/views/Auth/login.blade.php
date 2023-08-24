@@ -76,7 +76,7 @@
                            <div class="field">
                               <label class="label_field hidden">hidden label</label>
                               <label class="form-check-label"><input type="checkbox" class="form-check-input"> Remember Me</label>
-                              <a class="forgot" href="">Forgotten Password?</a>
+                              <a class="forgot" href="{{route('forgot/pass')}}">Forgotten Password?</a>
                            </div>
                            <div class="field margin_0">
                               <label class="label_field hidden">hidden label</label>

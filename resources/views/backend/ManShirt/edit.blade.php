@@ -8,34 +8,39 @@
                 <div class="login_section">
                     <div class="login_form">
                         <div class="center">
-                                <p class="Titel">Shirt & Scart</p>
+                                <p class="Titel">Man Fashion Edit Form</p>
                         </div>
-                        <button class="addbutton btn btn-lg">Show List</button>
-                        <form method="post">
+                        <a class="addbutton btn btn-lg" href="{{route('main/list')}}">Show List</a>
+                        <form method="post" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <fieldset>
                             <div class="field">
                                 <label class="label_field">Title</label>
-                                <input type="text" name="name" value="{{old('Title')}}" placeholder="Title" />
+                                <input type="text" name="Title" value="{{$data->Title}}" placeholder="Title" />
                                 @error('Title')
                                     <div class="errormessage">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="field">
                                 <label class="label_field">Price </label>
-                                <input type="text" name="email" value="{{old('Price')}}" placeholder="Price" />
+                                <input type="text" name="Price" value="{{$data->Price}}" placeholder="Price" />
                                 @error('Price')
                                     <div class="errormessage">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="field">
                                 <label class="label_field">Photo</label>
-                                <input type="file" name="Photo" value="{{old('Photo')}}" placeholder="Photo" />
+                                <input type="text" name="Photo_hidden" value="{{$data->Photo}}" />
+                                <input type="file" name="Photo"  />
                                 @error('Photo')
                                     <div class="errormessage">{{$message}}</div>
                                 @enderror
                             </div>
-                            <a class="main_add" href="{{route('login')}}">Add List</a>
+                            <div class="field">
+                                <label class="label_field"></label>
+                                <button class="main_add" type="submit">Add</button>
+                            </div>
                         </fieldset>
                         </form>
                     </div>

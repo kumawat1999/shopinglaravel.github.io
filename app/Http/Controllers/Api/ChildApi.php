@@ -51,7 +51,70 @@ class ChildApi extends Controller
             ]);
         }
     }
+    public function Child_Fatch_data($id){
+        try {
+        $data=ChildModel::where('id',$id)->first();
+        return response()->json([
+            'status'=>true,
+            'message'=>'successfully Fatch Data',
+            'data'=>$data,
+        ]);
+    } catch (\Throwable $th) {
+        return response()->json([
+            'status'=>false,
+            'message'=>$th->getMessage(),
+            'data'=>[],
+        ]);
+    }
 }
+    public function Update_Api_Data(Request $request,$id){
+        try {
+            $photos='';
+            if($photos==''){
+                $photos=$request->get('Photo_hidden');
+            }
 
+            if ($request->hasFile('Photo')) {
+                $photos = $request->file('Photo');
+                $PhotoName = rand(100000, 999999) . '.' . $photos->getClientOriginalExtension();
+                $photos->move(public_path('images'), $PhotoName);
+            }
+           $data= ChildModel::where('id',$id)->update([
+                'Title'=>$request->get('Title'),
+                'Price'=>$request->get('Price'),
+                'Photo'=>$PhotoName,
+            ]);
+            return response()->json([
+                'status'=>true,
+                'message'=>'Your Data Successfully Updatet Data',
+                'data'=>$data,
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status'=>false,
+                'message'=>$th->getMessage(),
+                'data'=>[],
+            ]);
+        }
+    }
+    public function Child_Delete($id){
+        try {
+            $data=ChildModel::where('id',$id)->first()->delete();
+
+            return response()->json([
+                'status'=>true,
+                'message'=>'Successfully Deleted Row',
+                'data'=>$data,
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status'=>false,
+                'message'=>$th->getMessage(),
+                'data'=>[],
+            ]);
+        }
+
+    }
+}
 
 

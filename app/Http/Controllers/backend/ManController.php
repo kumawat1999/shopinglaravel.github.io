@@ -36,7 +36,41 @@ class ManController extends Controller
         $reslut->Price = $request->get('Price');
         $reslut->Photo=$PhotoName;
         $reslut->save();
-        return redirect()->route('shirt/list');
+        return redirect()->route('main/list');
+    }
+    public function Man_Edit($id){
+        $data=ManModel::where('id',$id)->first();
+        return view('backend.ManShirt.edit',compact('data'));
+    }
+
+    public function Man_Update(Request $request,$id){
+        $request->validate([
+            'Title' => 'required',
+            'Price' => 'required',
+            'Photo' => 'required',
+        ]);
+        $photos='';
+        if($photos==''){
+            $photos=$request->get('Photo_hidden');
+        }
+
+        if ($request->hasFile('Photo')) {
+            $photos = $request->file('Photo');
+            $PhotoName = rand(100000, 999999) . '.' . $photos->getClientOriginalExtension();
+            $photos->move(public_path('images'), $PhotoName);
+        }
+        ManModel::where('id',$id)->update([
+            'Title'=>$request->get('Title'),
+            'Price'=>$request->get('Price'),
+            'Photo'=>$PhotoName,
+        ]);
+        return redirect()->route('main/list');
+
+    }
+    public function Man_Delete($id){
+        $data=ManModel::where('id',$id)->first();
+        $data->delete();
+        return redirect()->route('main/list');
     }
 }
 

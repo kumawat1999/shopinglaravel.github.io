@@ -37,10 +37,10 @@
                         <img src="/images/{{$data->Photo}}" width="80px"/>
                     </td>
                     <td>
-                        <a href="" class="btn btn-success ">Update</a>
+                        <a href="{{route('main/edit',$data->id)}}" type="submit" class="btn btn-success ">Update</a>
                     </td>
                     <td>
-                        <a href="" class="btn btn-danger">Delete</a>
+                        <a href="{{route('main/Delete',$data->id)}}" type="submit" class="btn btn-danger">Delete</a>
                     </td>
                    </tr>
                    @endforeach

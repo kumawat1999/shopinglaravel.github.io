@@ -1,0 +1,56 @@
+@include('backend.header')
+@include('backend.sidbar')
+ <!-- table section -->
+ <div class="col-sm-3"></div>
+ <div class="col-sm-9" style="margin-top: 80px">
+    <div class="white_shd full margin_bottom_30">
+        <div class="full graph_head">
+            <div class="heading1 margin_0">
+                <div class="center">
+                <p class="Titel">Man Categroy
+                    <a class="addbutton btn btn-lg" href="{{route('Categroy/Add')}}">Show Form</a>
+                    <button class="addbutton btn btn-lg">Go To Trash List</button>
+                </p>
+            </div>
+          </div>
+       </div>
+       <div class="table_section padding_infor_info">
+          <div class="table-responsive-sm">
+             <table class="table table-hover">
+                <thead>
+                   <tr>
+                      <th>Foren Id</th>
+                      <th>Name</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                      <th>Action</th>
+                   </tr>
+                </thead>
+                <tbody>
+                    @foreach ($CategroyList as $key=>$data)
+                   <tr>
+                        <td>{{$key+1}}</td>
+                        <td>{{$data->Name}}</td>
+                        <td>
+                        @if($data->Status=='1')
+                        <a href="/Status/{{$data->id}}" class=" btn btn-success ">YES</a>
+                        @else
+                        <a href="/Status/{{$data->id}}" class="btn btn-danger">NO</a>
+                        @endif
+                        </td>
+                        <td>
+                            <a href="{{route('Categroy/Edit',$data->id)}}" type="button" class="btn btn-success ">Update</a>
+                        </td>
+                        <td>
+                            <a href="{{route('Categroy/Delete',$data->id)}}" type="button" class="btn btn-danger">Delete</a>
+                        </td>
+                   </tr>
+                   @endforeach
+                </tbody>
+             </table>
+          </div>
+       </div>
+    </div>
+ </div>
+ <!-- table section -->
+ @include('backend.footer')

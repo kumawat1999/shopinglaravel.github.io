@@ -22,13 +22,18 @@ class LoginController extends Controller
         ]);
 
         $result=$request->only('email','password');
-         if(Auth::attempt($result)){
+        if(Auth::attempt($result)){
+
             return redirect()->intended('Dashbord');
-         }
-         return redirect('login')->withSuccess('not login');
+        }
+        return redirect('login')->withSuccess('not login');
+
      }
+
     public function logout(){
-        Auth::logout();
+
+       Auth::logout();
+
         return redirect('login');
     }
 }
