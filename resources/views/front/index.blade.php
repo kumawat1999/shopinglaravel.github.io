@@ -60,7 +60,7 @@
                            <div class="col-lg-4 col-sm-4">
                               <div class="box_main">
                                  <h4 class="shirt_text">{{$data->Title}}</h4>
-                                 <p class="price_text ">Price $ <span style="color: #262626;">{{$data->Price}}</span></p>
+                                 <p class="price_text">Price $ <span style="color: #262626;">{{$data->Price}}</span></p>
                                  <div class="tshirt_img"><img src="/images/{{$data->Photo}}"></div>
                                  <div class="btn_main">
                                     <div class="buy_bt"><a href="#">Buy Now</a></div>

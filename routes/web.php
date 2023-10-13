@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\Admin;
+use App\Http\Controllers\backend\DashboardController;
 /*
 
 |--------------------------------------------------------------------------
@@ -19,12 +20,13 @@ Route::get('/', function () {
 });
 
 
-Route::group(['prefix' => 'as'], function () {
+Route::group(['prefix' => ''], function () {
+
     Route::get('register', 'App\Http\Controllers\Auth\RegisterController@ShowRegisterForm')->name('register');
     Route::post('register', 'App\Http\Controllers\Auth\RegisterController@RegisterFormFunction');
     Route::get('login', 'App\Http\Controllers\Auth\LoginController@ShowLoginForm')->name('login');
     Route::post('login', 'App\Http\Controllers\Auth\LoginController@LoginFormFunction')->name('login');
-    Route::any('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+    Route::get('logout', 'App\Http\Controllers\Auth\LoginController@youlogout')->name('logout');
 
 
 
@@ -34,9 +36,10 @@ Route::group(['prefix' => 'as'], function () {
     Route::post('Confurn/password', 'App\Http\Controllers\Auth\forgote@Update_Password')->name('Confurn/password');
 
     Route::group(['middleware' => 'loginss'], function () {
-        Route::get('Dashbord', [Admin::class, 'index']);
+        // Route::get('Dashbord_1', [Admin::class, 'index'])->name('dashboard/page1');
 
-        Route::get('tables', [Admin::class, 'tables'])->name('tables');
+        Route::get('Dashbord', [DashboardController::class, 'dashboard'])->name('dashboard/page'); // all tables img par link
+
         // main route start
         Route::get('main/relation', 'App\Http\Controllers\backend\ManController@relationShip')->name('main/relationShip');
         Route::get('main/list', 'App\Http\Controllers\backend\ManController@ShowList')->name('main/list');
@@ -129,32 +132,32 @@ Route::group(['prefix' => 'as'], function () {
         // Electronic 1 route edd
 
 
+
+        // Categroy start
+        Route::get('Categroy/List', 'App\Http\Controllers\backend\ManCategoryController@Man_Categroy_List')->name('Categroy/List');
+        Route::get('Categroy/Add', 'App\Http\Controllers\backend\ManCategoryController@Man_Categroy_Add')->name('Categroy/Add');
+        Route::post('Categroy/Add', 'App\Http\Controllers\backend\ManCategoryController@Man_Categroy_Function');
+        Route::get('Categroy/Edit/{id}', 'App\Http\Controllers\backend\ManCategoryController@Man_Edit_Show_Form')->name('Categroy/Edit');
+        Route::put('Categroy/Edit/{id}', 'App\Http\Controllers\backend\ManCategoryController@Man_Categroy_Upadate')->name('Categroy/Edit');
+        Route::get('Categroy/Delete/{id}', 'App\Http\Controllers\backend\ManCategoryController@Man_Categroy_Delete')->name('Categroy/Delete');
+        Route::get('Status/{id}', 'App\Http\Controllers\backend\ManCategoryController@Status');
+        // Categroy edd
+
+
+        //Sub categroy Start
+        Route::get('Sub/Categroy/List', 'App\Http\Controllers\backend\SubCategoryController@Sub_Categroy_List')->name('Sub/Categroy/List');
+        Route::get('Sub/Categroy/Add', 'App\Http\Controllers\backend\SubCategoryController@Sub_Categroy_Add')->name('Sub/Categroy/Add');
+        Route::post('Sub/Categroy/Add', 'App\Http\Controllers\backend\SubCategoryController@SubCategroyFunction')->name('Sub/Categroy/Add');
+        Route::get('Sub/Categroy/Edit/{id}', 'App\Http\Controllers\backend\SubCategoryController@Sub_Categroy_Edit')->name('Sub/Categroy/Edit');
+        Route::put('Sub/Categroy/Update/{id}', 'App\Http\Controllers\backend\SubCategoryController@Sub_Categroy_Update')->name('Sub/Categroy/Update');
+        Route::get('Sub/Categroy/Delete/{id}', 'App\Http\Controllers\backend\SubCategoryController@Sub_Categroy_Delete')->name('Sub/Categroy/Delete');
+
+        Route::get('Sub/Categroy/Status/{id}', 'App\Http\Controllers\backend\SubCategoryController@SubStatus')->name('Sub/Categroy/Status');
+        //Sub categroy Start
+
+
     });
 });
-// Categroy start
-Route::get('Categroy/List', 'App\Http\Controllers\backend\ManCategoryController@Man_Categroy_List')->name('Categroy/List');
-Route::get('Categroy/Add', 'App\Http\Controllers\backend\ManCategoryController@Man_Categroy_Add')->name('Categroy/Add');
-Route::post('Categroy/Add', 'App\Http\Controllers\backend\ManCategoryController@Man_Categroy_Function');
-Route::get('Categroy/Edit/{id}', 'App\Http\Controllers\backend\ManCategoryController@Man_Edit_Show_Form')->name('Categroy/Edit');
-Route::put('Categroy/Edit/{id}', 'App\Http\Controllers\backend\ManCategoryController@Man_Categroy_Upadate')->name('Categroy/Edit');
-Route::get('Categroy/Delete/{id}', 'App\Http\Controllers\backend\ManCategoryController@Man_Categroy_Delete')->name('Categroy/Delete');
-Route::get('Status/{id}', 'App\Http\Controllers\backend\ManCategoryController@Status');
-// Categroy edd
-
-
-//Sub categroy Start
-Route::get('Sub/Categroy/List', 'App\Http\Controllers\backend\SubCategoryController@Sub_Categroy_List')->name('Sub/Categroy/List');
-Route::get('Sub/Categroy/Add', 'App\Http\Controllers\backend\SubCategoryController@Sub_Categroy_Add')->name('Sub/Categroy/Add');
-Route::post('Sub/Categroy/Add', 'App\Http\Controllers\backend\SubCategoryController@SubCategroyFunction')->name('Sub/Categroy/Add');
-Route::get('Sub/Categroy/Edit/{id}', 'App\Http\Controllers\backend\SubCategoryController@Sub_Categroy_Edit')->name('Sub/Categroy/Edit');
-Route::put('Sub/Categroy/Update/{id}', 'App\Http\Controllers\backend\SubCategoryController@Sub_Categroy_Update')->name('Sub/Categroy/Update');
-Route::get('Sub/Categroy/Delete/{id}', 'App\Http\Controllers\backend\SubCategoryController@Sub_Categroy_Delete')->name('Sub/Categroy/Delete');
-
-Route::get('Sub/Categroy/Status/{id}', 'App\Http\Controllers\backend\SubCategoryController@Sub_Status')->name('Sub/Categroy/Status');
-//Sub categroy Start
-
-
-
 
 
 
@@ -167,6 +170,13 @@ Route::get('Sub/Categroy/Status/{id}', 'App\Http\Controllers\backend\SubCategory
 
 
 /*-------------------------- Front --------------------------*/
-Route::get('fronts', 'App\Http\Controllers\front\HomeController@HomePage');
-Route::get('fronts', 'App\Http\Controllers\front\ManFashion@Shirat_Scart');
+Route::get('Home', 'App\Http\Controllers\front\HomeController@HomePage');
+Route::get('Jewellery', 'App\Http\Controllers\front\HomeController@Jewellery');
+Route::get('fashion', 'App\Http\Controllers\front\HomeController@fashion');
+Route::get('electronic', 'App\Http\Controllers\front\HomeController@electronic');
+
+Route::get('Home', 'App\Http\Controllers\front\ManFashion@Shirat_Scart');
 Route::get('Electronic', 'App\Http\Controllers\front\ElectronicController@Electronic');
+
+
+

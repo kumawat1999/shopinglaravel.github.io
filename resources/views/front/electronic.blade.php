@@ -2,6 +2,13 @@
 @extends('front.commen')
 @section('contant')
 
+<style>
+    .fashion_taital{
+            color: rgb(247, 247, 246);
+            font-size: 60px;
+            margin-top: 30px;
+    }
+</style>
   <!-- electronic section start -->
   <div class="fashion_section">
      <div id="electronic_main_slider" class="carousel slide" data-ride="carousel">

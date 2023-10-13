@@ -20,20 +20,20 @@
                 <thead>
                    <tr>
                       <th>Sr. No.</th>
-                      <th>Sub Categroy Name</th>
+                      <th>Man Categroy Name</th>
                       <th>Status</th>
-                      <th>Categroy Name</th>
+                      <th>Sub Categroy Name</th>
                       <th>Action</th>
                    </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $key=>$datas)
+                    @foreach ($ManCategoryss as $key=>$datas)
                     <tr>
                         <td>{{$key+1}}</td>
                         {{-- <td>{{$datas->Name}}</td> --}}
-                        <td>{{$datas->getCategroy->Name}}</td>
+                        <td>{{$datas->Name}}</td>
                         <td>
-                            @if($datas->SubStatus=='1')
+                            @if($datas->substatus=='1')
                             <a href="{{route('Sub/Categroy/Status',$datas->id)}}" class=" btn btn-success ">YES</a>
                             @else
                             <a href="{{route('Sub/Categroy/Status',$datas->id)}}" class="btn btn-danger">NO</a>

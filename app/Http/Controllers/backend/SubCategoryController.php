@@ -15,12 +15,13 @@ class SubCategoryController extends Controller
     }
 
     public function Sub_Categroy_List(){
-    //   $ManCategoryss=ManCategory::select('man_categories.*','sub_categroy_models.Names')->join('sub_categroy_models','man_categories.id','=','sub_categroy_models.ForenKey')->get();
+      $ManCategoryss=ManCategory::select('man_categories.*','sub_categroy_models.Names','sub_categroy_models.substatus')
+      ->join('sub_categroy_models','man_categories.id','=','sub_categroy_models.ForenKey')->get();
 
-    //     return view('backend.Categroy.SubCategory.List' ,compact('ManCategoryss'));
+        return view('backend.Categroy.SubCategory.List' ,compact('ManCategoryss'));
 
-        $data=SubCategroyModel::with('getCategroy')->get();
-        return view('backend.Categroy.SubCategory.List' ,compact('data'));
+        // $data=SubCategroyModel::with('getCategroy')->get();
+        // return view('backend.Categroy.SubCategory.List' ,compact('data'));
         // echo "<pre>"; print_r($data);
     }
 
@@ -49,22 +50,24 @@ class SubCategoryController extends Controller
     }
 
 
+    public function SubStatus($id){          ////************* status Function
+        $product=SubCategroyModel::select('substatus')->where('ForenKey',$id)->first();
 
-
-    public function Sub_Status($id){          ////************* status Function
-        $productsss=SubCategroyModel::select('substatus')->where('id',$id)->first();
-
-        if($productsss->substatus=='1'){
+        if($product->substatus=='1'){
             $substatus='0';
 
         }
         else{
             $substatus='1';
         }
-        $value=array('Status'=>$substatus);
-        SubCategroyModel::where('id',$id)->update($value);
+        $product=array('substatus'=>$substatus);
+        SubCategroyModel::where('ForenKey',$id)->update($product);
         return redirect()->route('Sub/Categroy/List');
    }
+
+
+
+
 }
 
 

@@ -39,6 +39,12 @@
                 $(".meassagealert").hide(4000);
         });
     </script>
+    <style>
+        .buttonss{
+
+            margin-top: 10px;
+        }
+    </style>
    </head>
 
 
@@ -73,12 +79,11 @@
                               <div class="errormessage">{{$message}}</div>
                              @enderror
                            </div>
-                           <div class="field">
+                           <div class="field buttonss">
                               <label class="label_field hidden">hidden label</label>
-                              <label class="form-check-label"><input type="checkbox" class="form-check-input"> Remember Me</label>
                               <a class="forgot" href="{{route('forgot/pass')}}">Forgotten Password?</a>
                            </div>
-                           <div class="field margin_0">
+                           <div class="field margin_0 ">
                               <label class="label_field hidden">hidden label</label>
                               <button class="main_bt2" type="submit">Sing In</button>
                               <a class="main_bt" href="{{route('register')}}">Register</a>

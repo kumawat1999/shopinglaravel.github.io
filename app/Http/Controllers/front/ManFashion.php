@@ -25,3 +25,4 @@ class ManFashion extends Controller
         return view('front.index',compact('Titles','senddatas','womanf','Childf','Electroni','Electroni2','Electroni3'));
 }
 }
+

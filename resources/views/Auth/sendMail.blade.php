@@ -3,7 +3,7 @@
 
 Dear  AMIT KUMAWAT,
 
-Your KYC record bearing PAN <b>OTP :</b>  {{$RandPasswordd }} is registered with CVL KRA.
+Your KYC record bearing SHOPING <b>OTP :</b>  {{$RandPasswordd }} is registered with CVL KRA.
 
 As per SEBI guidelines, the registered email ID in KYC records needs to be validated by KRA.
 

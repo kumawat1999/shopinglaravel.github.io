@@ -5,6 +5,8 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ManCategory;
+use App\Models\SubCategroyModel;
+
 
 class ManCategoryController extends Controller
 {
@@ -69,6 +71,8 @@ class ManCategoryController extends Controller
         else{
             $Status='1';
         }
+
+
         $product=array('Status'=>$Status);
         ManCategory::where('id',$id)->update($product);
         return redirect()->route('Categroy/List');

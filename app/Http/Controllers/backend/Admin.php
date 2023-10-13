@@ -10,9 +10,7 @@ class Admin extends Controller
     public function index(){
         return view('backend.index');
     }
-    public function tables(){
-        return view('backend.tables');
-    }
+
 }
 
 

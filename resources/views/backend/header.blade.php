@@ -58,7 +58,9 @@
                          <a class="dropdown-item" href="profile.html">My Profile</a>
                          <a class="dropdown-item" href="settings.html">Settings</a>
                          <a class="dropdown-item" href="help.html">Help</a>
-                         <a class="dropdown-item" href="{{route('logout')}}"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
+                         <span>
+                         <a class="dropdown-item" href="{{route('logout')}}"><i class="fa fa-sign-out">Log Out</i></a>
+                        </span>
                       </div>
                    </li>
                 </ul>

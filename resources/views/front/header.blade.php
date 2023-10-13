@@ -78,10 +78,10 @@
                <div class="containt_main">
                   <div id="mySidenav" class="sidenav">
                      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                     <a href="index.html">Home</a>
-                     <a href="fashion.html">Fashion</a>
-                     <a href="electronic.html">Electronic</a>
-                     <a href="jewellery.html">Jewellery</a>
+                     <a href="{{url('http://localhost:8000/Home')}}">Home</a>
+                     <a href="{{url('fashion')}}">Fashion</a>
+                     <a href="{{url('electronic')}}">Electronic</a>
+                     <a href="{{url('Jewellery')}}">Jewellery</a>
                   </div>
                   <span class="toggle_icon" onclick="openNav()"><img src="{{asset('front/images/toggle-icon.png')}}"></span>
                   <div class="dropdown">

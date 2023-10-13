@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
-
 class forgote extends Controller
 {
     public function forgotepassword(){
@@ -29,9 +28,10 @@ class forgote extends Controller
             $result->otp=$RandPasswordd;
             $result->save();
 
-            \Mail::send('Auth/sendMail',compact('RandPasswordd'), function ($message) use($request) {
-                $message->to($request->get('email'))->subject('Subject of the message!');
-            });
+            // \Mail::send('Auth/sendMail',compact('RandPasswordd'), function ($message) use($request) {
+            //     $message->to($request->get('email'))->subject('Subject of the message!');
+            // });
+
             return redirect()->route('Confurn/pass');
         }
         return redirect()->back();
